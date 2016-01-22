@@ -1,7 +1,9 @@
 # Job_Application-
 Small bash script using zenity as gui to speed up writting an Application
 #Needs
-pdftk and zenity
+- Latex 
+- pdftk
+- zenity
 
 #Use
 First run the config_user.sh file to Input your personal Information
