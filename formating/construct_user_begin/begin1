@@ -1,0 +1,87 @@
+ 
+\documentclass
+%---------------------------------------------------------------------------
+  [fontsize=12pt,%%          Font size
+%---------------------------------------------------------------------------
+% Type area
+   paper=a4,%%               Sheet size
+   enlargefirstpage=on,%%    Enlarge the first page
+   pagenumber=off,%%   Page number on the top right of the header
+%---------------------------------------------------------------------------
+% Layout
+   headsepline=off,%%         Line below the page number
+   parskip=half,%%           Space between paragraphs
+%---------------------------------------------------------------------------
+% Letterhead and address
+   fromalign=right,
+   fromphone=off,  
+   fromrule=aftername,
+   fromfax=off,%%            Fax number
+   fromemail=off,%%          Mail address
+   fromurl=off,%%            Homepage
+   fromlogo=off,%%           Company logo
+   addrfield=on,%%           Adress field for window envelopes
+   backaddress=on,
+   subject=beforeopening,%%  Positioning of the subject
+   locfield=narrow,%%        Additional field for the sender
+   foldmarks=off,%%           Folding mark
+   numericaldate=off,%%      Numerical date
+   refline=narrow,%%         Spread of the reference line in the type area
+%---------------------------------------------------------------------------
+% Formatting
+   draft=on%%                
+]{scrlttr2}
+%---------------------------------------------------------------------------
+\usepackage[ngerman]{babel}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%---------------------------------------------------------------------------
+
+\usepackage{lmodern}
+\usepackage{xcolor}% MJK: xcolor ist color meilenweit überlegen.
+\usepackage{marvosym} % symbols for footer
+%---------------------------------------------------------------------------
+
+\usepackage{geometry}
+\geometry{a4paper,left=24.1mm,right=24.1mm,
+          headheight=20mm,
+          includehead,    
+          top=20mm,
+          bottom=40mm}    
+\LoadLetterOption{KOMAold} 
+\makeatletter
+\@setplength{firstheadvpos}{20mm}
+\makeatother
+ 
+%---------------------------------------------------------------------------
+
+\colorlet{fromname}{gray}
+\definecolor{footersymbol}{rgb}{0.30,0.65,0.15}
+\definecolor{pagefoot}{rgb}{0.35,0.35,0.35} 
+\newkomafont{fromfirstname}{\color{fromfirstname}}
+\newkomafont{fromlastname}{\color{fromlastname}}
+\setkomafont{pageheadfoot}{}
+\setkomafont{pagefoot}{\small\sffamily\slshape
+  \color{pagefoot}}
+\setkomafont{fromrule}{\color{footersymbol}}
+\newcommand*{\addressfont}{\small\sffamily\mdseries\slshape}
+\newcommand{\footersymbol}{
+  \quad
+  {\color{footersymbol}\normalfont\textbullet}%
+  \quad
+}
+\setkomafont{fromname}{%
+  \LARGE          
+  \color{fromname}
+}
+\setkomafont{fromaddress}{%
+  \small 
+}
+\setkomafont{pagenumber}{\sffamily}
+\setkomafont{subject}{}
+\setkomafont{backaddress}{}
+\usepackage{mathptmx}% 
+%---------------------------------------------------------------------------
+
+\setkomavar{fromname}{

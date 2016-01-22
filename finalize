@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ ! -d $1/final ]; then
+ mkdir $1/final 
+fi
+
+if [ -f ../attachment/*.pdf ];then #check if there is an attachment
+  pdftk $1/anschreiben.pdf ../attachment/*.pdf cat output $1/final/$2
+else 
+  pdftk $1/anschreiben.pdf  cat output $1/final/$2
+fi

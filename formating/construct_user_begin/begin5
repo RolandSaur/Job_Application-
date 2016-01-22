@@ -1,0 +1,68 @@
+}
+\setkomavar{backaddressseparator}{. }
+\setkomavar{signature}{(\usekomavar{fromname})}
+\makeatletter
+\@setplength{fromrulewidth}{\useplength{firstheadwidth}}
+\@setplength{fromrulethickness}{1pt}
+\makeatother
+ 
+\setkomavar{nexthead}{
+  \KOMAoptions{parskip=half-}%
+  \csname @setplength\endcsname{fromrulewidth}{\linewidth}%
+  \parbox[b]{\textwidth}{\usekomavar{firsthead}}%
+}
+%---------------------------------------------------------------------------
+\setkomavar{firstfoot}{
+  \centering
+  \usekomafont{pagefoot}{\pagemark}%
+}
+\renewcommand*{\pagemark}{%
+  \usekomafont{pagenumber}{\thepage/\pageref{last.\theletter}}%
+}
+\newcounter{letter}
+\AtBeginLetter{\stepcounter{letter}}
+\AtEndLetter{\label{last.\theletter}}
+\setkomavar{nextfoot}{
+  \KOMAoptions{parskip=half-}\centering
+  \parbox[t]{\linewidth}{
+    \centering
+    {\renewcommand*{\\}{\ --\ }\usekomavar{fromaddress}}\\
+    \let\usefootersymbol\relax
+    \ifkomavarempty{fromcellphone}{}{%
+      \usekomavar*{fromcellphone}%
+      \usekomavar{phoneseparator}%
+      \usekomavar{fromcellphone}%
+      \let\usefootersymbol\footersymbol
+    }%
+    \ifkomavarempty{fromphone}{}{%
+      \usefootersymbol
+      \usekomavar*{fromphone}%
+      \usekomavar{phoneseparator}%
+      \usekomavar{fromphone}%
+      \let\usefootersymbol\footersymbol
+    }%
+    \ifkomavarempty{fromfax}{}{%
+      \usefootersymbol
+      \usekomavar*{fromfax}%
+      \usekomavar{faxseparator}%
+      \usekomavar{fromfax}%
+      \let\usefootersymbol\footersymbol
+    }%
+    \ifkomavarempty{fromemail}{}{%
+      \usefootersymbol
+      \usekomavar*{fromemail}%
+      \usekomavar{emailseparator}%
+      \usekomavar{fromemail}%
+      \let\usefootersymbol\footersymbol
+    }%
+    \ifx\usefootersymbol\relax\else\\\fi
+    \ifkomavar{fromextrainfo}{%
+      \ifkomavarempty{fromextrainfo}{}{%
+        \usekomavar{fromextrainfo}\\
+      }%
+    }{}
+    \vskip\baselineskip
+    \pagemark
+  }
+}
+\setkomavar{place}{

@@ -1,0 +1,77 @@
+#!/bin/bash
+
+#check if there is a config file
+if [ ! -f formating/user_config ];then
+   zenity --error --text="No config file found, please run config_user first"
+   exit
+fi
+
+./read_config.sh
+ 
+x=$(zenity --entry --text="New Directory")
+echo $x
+if [ ! -d $x ]; then
+  mkdir $x
+fi
+
+#here come some variable text, intro outro and others
+Betreff=$(zenity --text-info --editable --filename="Defaults/betreff" --title="Subject")
+#echo $Betreff
+address=$(zenity --text-info --editable --filename="Defaults/address" --title="Address")
+Intro=$(zenity --text-info --editable --filename="Defaults/intro" --title="Intro")
+Outro=$(zenity --text-info --editable --filename="Defaults/out" --title="Outro")
+
+sentences=$(ls "sentences")
+liste=""
+for i in $sentences
+do 
+   liste="$liste FALSE $i \\"
+done 
+
+liste=${liste%\\}
+
+choices_code="zenity  --list  --checklist  --column 'Check'  --column 'Sentence' \\"
+
+choice_code="$choices_code $liste "
+
+#echo $choice_code
+choices=$(eval $choice_code)
+
+TextMain=""
+#echo $choices
+IFS='|' #reset seperator
+for VAR in $choices
+do 
+        text=$(cat sentences/$VAR)
+        TextMain="$TextMain $text"
+done
+touch helpfile.txt
+echo $TextMain > helpfile.txt
+MainText=$(zenity --text-info --editable --filename="helpfile.txt")
+rm helpfile.txt
+
+#All the text gets concatenated
+##create tex  file
+rm -r $x/*
+touch $x/anschreiben.tex
+
+## paste coresspondent blabla
+cat formating/begin.txt >> $x/anschreiben.tex
+echo $address >> $x/anschreiben.tex
+cat formating/middle.txt >> $x/anschreiben.tex
+echo $Betreff >> $x/anschreiben.tex
+cat formating/middle2.txt >> $x/anschreiben.tex
+echo $Intro >> $x/anschreiben.tex
+echo "}" >> $x/anschreiben.tex
+
+echo $MainText >> $x/anschreiben.tex
+echo $Outro >> $x/anschreiben.tex
+#echo "}" >> $x/anschreiben.tex
+cat formating/ending.txt >> $x/anschreiben.tex
+
+cd $x 
+pdflatex anschreiben.tex
+pdflatex anschreiben.tex
+pwd_var=$(pwd)
+FinalFileName=$(zenity --entry --entry-text="filename" --text="Name of Final File")
+sh ../finalize $pwd_var $FinalFileName

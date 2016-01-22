@@ -1,0 +1,11 @@
+}
+
+\newkomavar[\Mobilefone]{fromcellphone}
+
+\setkomavar*{fromphone}{\Telefon}
+\setkomavar*{fromfax}{\FAX}
+\setkomavar*{fromemail}{\Letter}
+\setkomavar{phoneseparator}{\nobreakspace}
+\setkomavar{faxseparator}{\nobreakspace}
+\setkomavar{emailseparator}{\nobreakspace}
+\setkomavar{fromcellphone}{

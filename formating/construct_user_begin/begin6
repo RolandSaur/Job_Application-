@@ -1,0 +1,6 @@
+}
+\setkomavar{date}{\today}
+\setkomavar{enclseparator}{: }
+\pagestyle{myheadings}
+\begin{document}
+\begin{letter}{
